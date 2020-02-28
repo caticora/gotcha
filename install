@@ -1,0 +1,54 @@
+#!/bin/bash
+
+## uncompress files into ~/Downloads
+## run ./install
+## take a break, you dun good
+
+app=/usr/local/bin/gotcha
+dir=/tmp/gotcha
+
+## installs required packages
+echo "Acquiring some magic..."
+## packages for sendEmail
+sudo apt-get install libio-socket-ssl-perl libnet-ssleay-perl sendemail
+## packages for ffmpeg, to interact with webcam
+sudo apt-get install ffmpeg
+echo "Magic acquired..."
+sleep 1.5
+
+## makes install directories
+echo "Making places for the stuff..."
+mkdir -p $app
+
+if test -d "$dir"
+then
+        echo "Found directory...";
+else
+        echo "Directory not found..."
+        sleep 1.5
+        echo "Creating directory $dir..."
+        mkdir -p $dir;
+fi
+sleep 1.5
+
+## moves working directory to extracted dir
+cd ~/Downloads/Gotcha
+
+##moves file to created directory
+echo "Moving the stuff to the place..."
+sudo mv gotcha $app
+sleep 1.5
+
+## moves working directory to /usr/local/bin/gotcha
+cd $app
+
+## makes script executable
+echo "Making the stuff do a thing..."
+chmod +x gotcha
+sleep 1.5
+
+echo "Finishing irrelevant dialog..."
+sleep 1.5
+echo "Irrelevant dialog complete..."
+sleep 1.5
+echo "Have a nice day :) "

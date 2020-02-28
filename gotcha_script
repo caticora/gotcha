@@ -1,0 +1,47 @@
+#!/bin/bash
+
+## variable key
+file=/tmp/gotcha/pic.jpg
+dir=/tmp/gotcha
+SMTPFROM=email@address.com
+SMTPTO=email@address.com
+SMTPSERVER=smtp.googlemail.com:587
+SMTPUSER=email@address.com
+SMTPPASS="smtp password here"
+SUBJECT="Someone tried to access your computer while you were away."
+MESSAGE="Someone tried to access your computer while you were away. Here's a ph$
+
+## create directory for pics, if it doesn't exist
+if test -d "$dir"
+then
+        echo "Found directory...";
+else
+        echo "Directory not found..."
+        sleep 1.5
+        echo "Creating directory $dir..."
+        mkdir -p $dir
+        sleep 1.5
+        echo "Directory created...";
+fi
+
+## clears directory before beginning script
+if test -f "$file"
+then 
+        echo "Clearing directory of any past files..."
+        sudo rm $file;
+fi
+
+## takes picture with webcam if incorrect password is entered
+## stores picture in created directory
+## must install ffmpeg to interface with webcam
+## sudo apt-get install ffmpeg
+ts=`date +%s`
+ffmpeg -f video4linux2 -s vga -i /dev/video0 -vframes 1 $file
+#exit 0  ## NOTE - must exit with status 0
+
+## send $file in email
+## must install these packages before using sendEmail
+## $ sudo apt-get install libio-socket-ssl-perl libnet-ssleay-perl sendemail
+sudo sendemail -f $SMTPFROM -t $SMTPTO -o tls=yes -a $file -u $SUBJECT -m $MESSAGE$
+
+
