@@ -9,7 +9,7 @@ SMTPSERVER=smtp.googlemail.com:587
 SMTPUSER=email@address.com
 SMTPPASS="smtp password here"
 SUBJECT="Someone tried to access your computer while you were away."
-MESSAGE="Someone tried to access your computer while you were away. Here's a ph$
+MESSAGE="Someone tried to access your computer while you were away. Here's a photo:"
 
 ## create directory for pics, if it doesn't exist
 if test -d "$dir"
@@ -42,6 +42,6 @@ ffmpeg -f video4linux2 -s vga -i /dev/video0 -vframes 1 $file
 ## send $file in email
 ## must install these packages before using sendEmail
 ## $ sudo apt-get install libio-socket-ssl-perl libnet-ssleay-perl sendemail
-sudo sendemail -f $SMTPFROM -t $SMTPTO -o tls=yes -a $file -u $SUBJECT -m $MESSAGE$
+sudo sendemail -f $SMTPFROM -t $SMTPTO -o tls=yes -a $file -u $SUBJECT -m $MESSAGE -s $SMTPSERVER -xu $SMTPUSER -xp $SMTPPASS
 
 
