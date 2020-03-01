@@ -7,7 +7,7 @@ SMTPFROM=email@address.com
 SMTPTO=email@address.com
 SMTPSERVER=smtp.googlemail.com:587
 SMTPUSER=email@address.com
-SMTPPASS="smtp password here"
+SMTPPASS="from email password here"
 SUBJECT="Someone tried to access your computer while you were away."
 MESSAGE="Someone tried to access your computer while you were away. Here's a photo:"
 
